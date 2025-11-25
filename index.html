@@ -3,163 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>音圓控價稽查戰情室 V3.0 (全系列版)</title>
+    <title>音圓控價狙擊手 V6.0 (品牌精確鎖定版)</title>
     <style>
-        :root { --primary: #2c3e50; --accent: #c0392b; --bg: #ecf0f1; --card: #ffffff; }
-        body { font-family: 'Segoe UI', Microsoft JhengHei, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
-        .header { text-align: center; margin-bottom: 25px; padding: 20px; background: linear-gradient(135deg, #1a252f, #34495e); color: white; border-radius: 12px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
-        .container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        :root { --primary: #2c3e50; --danger: #c0392b; --bg: #f8f9fa; --card: #fff; }
+        body { font-family: "Microsoft JhengHei", Arial, sans-serif; background: var(--bg); padding: 20px; color: #333; }
+        .header { text-align: center; margin-bottom: 30px; padding: 20px; background: #2c3e50; color: white; border-radius: 10px; }
+        .container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: var(--card); padding: 20px; border-radius: 10px; border-top: 5px solid #ccc; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card h2 { margin-top: 0; font-size: 1.2rem; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .card.party { border-top-color: #3498db; }
+        .card.star { border-top-color: #27ae60; }
+        .card.other { border-top-color: #f39c12; }
         
-        /* 卡片通用設計 */
-        .card { background: var(--card); padding: 15px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.05); border-top: 4px solid #bdc3c7; }
-        .card h2 { margin-top: 0; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 8px; color: #2c3e50; }
-        .price-badge { font-size: 0.8rem; background: #f1f2f6; padding: 2px 8px; border-radius: 12px; color: #7f8c8d; }
-        
-        /* 各型號顏色標示 */
-        .card.party { border-top-color: #3498db; } /* 藍 */
-        .card.star55 { border-top-color: #2ecc71; } /* 綠 */
-        .card.star25 { border-top-color: #1abc9c; } /* 青 */
-        .card.w600 { border-top-color: #9b59b6; } /* 紫 */
-        .card.n2 { border-top-color: #f1c40f; } /* 黃 */
-        .card.n5 { border-top-color: #e67e22; } /* 橘 */
-        .card.alert { border-top-color: #e74c3c; grid-column: 1 / -1; background: #fff5f5; } /* 紅 - 計算機與警報 */
-
-        /* 按鈕樣式 */
-        .btn-group { display: grid; gap: 8px; margin-top: 10px; }
-        .btn { text-decoration: none; padding: 10px; border-radius: 6px; background: #f8f9fa; color: #2c3e50; border: 1px solid #dfe6e9; font-size: 0.9rem; display: flex; justify-content: space-between; transition: 0.2s; }
-        .btn:hover { background: #e2e6ea; border-color: #b2bec3; }
-        .btn.danger { background: #fff0f0; color: #c0392b; border-color: #fadbd8; }
-        .btn.danger:hover { background: #f5c6cb; }
-
-        /* 計算機介面 */
-        .calc-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .calc-input label { display: block; font-size: 0.85rem; margin-bottom: 3px; color: #7f8c8d; }
-        input, select { width: 100%; padding: 8px; border: 1px solid #bdc3c7; border-radius: 4px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 15px; }
-        button:hover { background: #34495e; }
-        .result { margin-top: 10px; padding: 10px; background: white; border-radius: 6px; text-align: center; font-weight: bold; font-size: 1.1rem; border: 1px solid #eee; }
-        .violation { color: #e74c3c; background: #fadbd8; }
-        .safe { color: #27ae60; background: #d5f5e3; }
-
-        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } .calc-container { grid-template-columns: 1fr; } }
+        .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; background: #fff; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; transition: 0.2s; box-sizing: border-box; }
+        .btn:hover { background: #f1f1f1; border-color: #aaa; }
+        .btn.danger { background: #fff5f5; color: #c0392b; border-color: #fc8181; font-weight: bold; }
+        .btn.danger:hover { background: #fed7d7; }
+        .badge { background: #e74c3c; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; margin-left: 5px; }
+        .filter-info { font-size: 0.8rem; color: #7f8c8d; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>🦅 音圓全系列控價戰情室 V3.0</h1>
-    <p>監控項目：Party-7000 / Star-55 / Star-25 / W-600S / N2 / N5</p>
+    <h1>🎯 音圓控價狙擊手 V6.0</h1>
+    <p>特色：關鍵字強制鎖定「音圓」 + 自動過濾配件</p>
 </div>
 
 <div class="container">
 
-    <div class="card alert">
-        <h2>🧮 結帳價違規計算機 (含折價券偵測)</h2>
-        <div class="calc-container">
-            <div class="calc-input">
-                <label>選擇稽查型號 (自動帶入參考底價)</label>
-                <select id="modelType" onchange="updatePlaceholder()">
-                    <option value="59000">Party-7000 (參考底限 $59,000)</option>
-                    <option value="47900">Star-55 (參考底限 $47,900)</option>
-                    <option value="39900">Star-25 (參考底限 $39,900)</option>
-                    <option value="31000">N2 系列 (參考底限 $31,000)</option>
-                    <option value="88000">W-600S (參考底限 $88,000)</option>
-                    <option value="50000">N5 系列 (參考底限 $50,000)</option>
-                </select>
-                <label>實際商品標價 (Listing Price)</label>
-                <input type="number" id="listPrice" placeholder="請輸入網頁標價">
-            </div>
-            <div class="calc-input">
-                <label>折扣/折價券/贈品價值 (Discount)</label>
-                <input type="number" id="couponValue" placeholder="券面額或贈品折現">
-                <button onclick="checkViolation()">執行判定</button>
-            </div>
-        </div>
-        <div id="checkResult" class="result" style="display:none;"></div>
-    </div>
-
     <div class="card party">
-        <h2>Party-7000 <span class="price-badge">目標 > 59K</span></h2>
-        <div class="btn-group">
-            <a href="https://www.google.com/search?q=東暉國際+Party-7000" target="_blank" class="btn danger">🔴 抓東暉官網 (55K)</a>
-            <a href="https://shopee.tw/search?keyword=Party-7000&sortBy=price" target="_blank" class="btn">🦐 蝦皮最低價排序</a>
-            <a href="https://tw.bid.yahoo.com/search/auction/product?p=Party-7000&sort=curp" target="_blank" class="btn">🔨 Y拍 (視紀/宏景)</a>
+        <h2>音圓 Party-7000 <span class="badge">抓 < 59,000</span></h2>
+        <div class="filter-info">區間：$40,000 ~ $58,900 (含音圓關鍵字)</div>
+        
+        <a href="https://shopee.tw/search?keyword=音圓%20Party-7000&minPrice=40000&maxPrice=58900&sortBy=price" target="_blank" class="btn danger">
+            🦐 蝦皮：搜「音圓 Party-7000」違規價
+        </a>
+        
+        <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Party-7000&price=40000-58900" target="_blank" class="btn danger">
+            📦 PChome：搜「音圓 Party-7000」
+        </a>
+
+        <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20Party-7000&minp=40000&maxp=58900&sort=curp" target="_blank" class="btn">
+            🔨 Y拍：搜「音圓 Party-7000」低價區
+        </a>
+
+        <a href="https://www.ruten.com.tw/find/?q=音圓%20Party-7000&p=40000%2C58900&sort=rnk%2Fdc" target="_blank" class="btn">
+            🔨 露天：搜「音圓 Party-7000」
+        </a>
+    </div>
+
+    <div class="card star">
+        <h2>音圓 Star-55 <span class="badge">抓 < 47,900</span></h2>
+        <div class="filter-info">區間：$35,000 ~ $47,800 (含音圓關鍵字)</div>
+
+        <a href="https://shopee.tw/search?keyword=音圓%20Star-55&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn danger">
+            🦐 蝦皮：搜「音圓 Star-55」違規價
+        </a>
+        
+        <a href="https://shopee.tw/search?keyword=音圓%20Star-55%20送觸控螢幕&minPrice=40000" target="_blank" class="btn danger">
+            🎁 蝦皮：搜「音圓 Star-55 送觸控螢幕」
+        </a>
+
+        <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Star-55&price=35000-47800" target="_blank" class="btn">
+            📦 PChome：搜「音圓 Star-55」
+        </a>
+
+        <a href="https://tw.carousell.com/search/音圓%20Star-55?price_start=30000&price_end=47000&sort_by=3" target="_blank" class="btn">
+            🔄 旋轉拍賣：搜「音圓 Star-55」
+        </a>
+    </div>
+
+    <div class="card other">
+        <h2>其他重點型號 <span class="badge">已加關鍵字</span></h2>
+        
+        <div style="margin-bottom: 15px;">
+            <strong>音圓 Star-25 (控價 $42,900)</strong>
+            <a href="https://shopee.tw/search?keyword=音圓%20Star-25&minPrice=30000&maxPrice=42800&sortBy=price" target="_blank" class="btn danger">
+                🦐 抓 < 42800 的 Star-25
+            </a>
+        </div>
+
+        <div>
+            <strong>音圓 W-600S (控價 $39,900)</strong>
+            <a href="https://shopee.tw/search?keyword=音圓%20W-600S&minPrice=20000&maxPrice=39800&sortBy=price" target="_blank" class="btn danger">
+                🦐 抓 < 39800 的 W-600S
+            </a>
         </div>
     </div>
 
-    <div class="card star55">
-        <h2>Star-55 <span class="price-badge">目標 > 47.9K</span></h2>
-        <div class="btn-group">
-            <a href="https://shopee.tw/search?keyword=Star-55%20送觸控螢幕" target="_blank" class="btn danger">🎁 抓「送螢幕」變相降</a>
-            <a href="https://shopee.tw/search?keyword=Star-55%20領券" target="_blank" class="btn danger">🎟️ 抓「領券」賣家</a>
-            <a href="https://tw.carousell.com/search/Star-55?sort_by=3" target="_blank" class="btn">🔄 旋轉拍賣 (個人倒貨)</a>
-        </div>
-    </div>
-
-    <div class="card star25">
-        <h2>Star-25 <span class="price-badge">目標 > 39.9K</span></h2>
-        <div class="btn-group">
-            <a href="https://shopee.tw/search?keyword=音圓%20Star-25&sortBy=price" target="_blank" class="btn">🦐 蝦皮低價掃描</a>
-            <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Star-25&price=10000-39000" target="_blank" class="btn danger">🚨 抓 PChome < 39K</a>
-            <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=Star-25" target="_blank" class="btn">Ⓜ️ MOMO 查隱藏券</a>
-        </div>
-    </div>
-
-    <div class="card w600">
-        <h2>W-600S <span class="price-badge">目標 > 88K</span></h2>
-        <div class="btn-group">
-            <a href="https://shopee.tw/search?keyword=音圓%20W-600S" target="_blank" class="btn">🦐 蝦皮價格檢視</a>
-            <a href="https://www.ruten.com.tw/find/?q=音圓%20W-600S&sort=rnk%2Fdc" target="_blank" class="btn danger">🔨 抓露天「議價/私訊」</a>
-            <a href="https://www.google.com/search?q=音圓+W-600S+二手" target="_blank" class="btn">🕵️ 抓「假二手真新機」</a>
-        </div>
-    </div>
-
-    <div class="card n2">
-        <h2>N2 系列 <span class="price-badge">目標 > 31K</span></h2>
-        <div class="btn-group">
-            <a href="https://shopee.tw/search?keyword=音圓%20N2&sortBy=price" target="_blank" class="btn danger">🦐 抓 N2 流血價</a>
-            <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓+N2&sort=curp" target="_blank" class="btn">🔨 Y拍 N2 低價區</a>
-        </div>
-    </div>
-
-    <div class="card n5">
-        <h2>N5 系列 <span class="price-badge">目標 > 50K</span></h2>
-        <div class="btn-group">
-            <a href="https://shopee.tw/search?keyword=音圓%20N5&sortBy=price" target="_blank" class="btn">🦐 抓 N5 破盤</a>
-            <a href="https://www.google.com/search?q=音圓+N5+伴唱機+價格" target="_blank" class="btn">🔍 Google 全網搜</a>
-        </div>
+    <div class="card" style="border-top-color: #8e44ad;">
+        <h2>🕵️‍♂️ 關鍵字獵人 (品牌鎖定版)</h2>
+        <div class="filter-info">已鎖定「音圓」品牌，且過濾低價配件</div>
+        
+        <a href="https://shopee.tw/search?keyword=音圓%20福利品&minPrice=10000" target="_blank" class="btn">
+            📦 搜「音圓 福利品/展示機」
+        </a>
+        <a href="https://shopee.tw/search?keyword=音圓%20甜甜價&minPrice=10000" target="_blank" class="btn danger">
+            🍬 搜「音圓 甜甜價」 (限主機)
+        </a>
+        <a href="https://shopee.tw/search?keyword=音圓%20僅試機&minPrice=10000" target="_blank" class="btn">
+            🔓 搜「音圓 僅試機」 (限主機)
+        </a>
     </div>
 
 </div>
-
-<script>
-    function updatePlaceholder() {
-        let floor = document.getElementById('modelType').value;
-        document.getElementById('listPrice').placeholder = "請輸入標價 (參考地板: $" + parseInt(floor).toLocaleString() + ")";
-    }
-
-    function checkViolation() {
-        let price = parseFloat(document.getElementById('listPrice').value);
-        let coupon = parseFloat(document.getElementById('couponValue').value);
-        let floorPrice = parseFloat(document.getElementById('modelType').value);
-        let resultDiv = document.getElementById('checkResult');
-        
-        if(isNaN(price)) { alert("請輸入商品標價！"); return; }
-        if(isNaN(coupon)) coupon = 0;
-
-        let finalPrice = price - coupon;
-        resultDiv.style.display = 'block';
-        
-        if (finalPrice < floorPrice) {
-            let diff = floorPrice - finalPrice;
-            resultDiv.className = "result violation";
-            resultDiv.innerHTML = `❌ 違規！結帳價 $${finalPrice.toLocaleString()} (低於控價 $${diff.toLocaleString()})`;
-        } else {
-            resultDiv.className = "result safe";
-            resultDiv.innerHTML = `✅ 合規。結帳價 $${finalPrice.toLocaleString()}`;
-        }
-    }
-</script>
 
 </body>
 </html>
