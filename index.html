@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>音圓控價戰情室 V22.0 (全通路制霸版)</title>
+    <title>音圓控價戰情室 V23.0 (現金折抵專用版)</title>
     <style>
         :root { --primary: #2c3e50; --bg: #f4f6f9; --card: #ffffff; --border: #e0e0e0; }
         body { font-family: "Microsoft JhengHei", Arial, sans-serif; margin: 0; padding: 0; color: #333; background: var(--bg); }
         
         /* 標題區 */
-        .header { text-align: center; padding: 30px; background: linear-gradient(to right, #000000, #434343); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .header { text-align: center; padding: 30px; background: linear-gradient(to right, #8E2DE2, #4A00E0); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         .header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
         .header p { margin: 10px 0 0; font-size: 1rem; opacity: 0.9; }
 
         /* 計算機 */
         .calc-wrapper { display: flex; justify-content: center; margin: -25px 0 30px; padding: 0 20px; }
-        .calc-panel { background: #fff; padding: 20px 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; border-top: 5px solid #bf0000; }
+        .calc-panel { background: #fff; padding: 20px 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; border-top: 5px solid #f39c12; }
         select, input { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
         button { padding: 10px 20px; background: #c0392b; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.2s; }
         button:hover { background: #a93226; }
@@ -23,7 +23,7 @@
 
         /* 主容器 */
         .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        .grid-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 25px; }
+        .grid-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
 
         /* 卡片樣式 */
         .card { background: var(--card); padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid var(--border); transition: transform 0.2s; }
@@ -44,18 +44,16 @@
         .momo { border-left: 4px solid #d63085; }
         .pchome { border-left: 4px solid #2980b9; }
         .yahoo { border-left: 4px solid #6001d2; }
-        .rakuten { border-left: 4px solid #bf0000; } /* 樂天紅 */
-        .etmall { border-left: 4px solid #ea5404; } /* 東森橘 */
-        .pcstore { border-left: 4px solid #009ad6; } /* 商店街藍 */
-        .biggo { border-left: 4px solid #2ecc71; }
+        .pcstore { border-left: 4px solid #009ad6; }
+        .coupon { border-left: 4px solid #ff9f43; background-color: #fffdf6; } /* 折扣券專用 */
 
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>音圓控價戰情室 V22.0</h1>
-    <p>新增：樂天市場、東森購物、PChome商店街 | 關鍵字精準鎖定</p>
+    <h1>音圓控價戰情室 V23.0</h1>
+    <p>現金折抵版：只抓當下折扣 (券/折/%) | 排除虛擬幣回饋</p>
 </div>
 
 <div class="calc-wrapper">
@@ -67,7 +65,7 @@
             <option value="49000">n2-550 (底限 $49,000)</option>
             <option value="44500">n2-350 (底限 $44,500)</option>
         </select>
-        <input type="number" id="finalPrice" placeholder="輸入結帳金額">
+        <input type="number" id="finalPrice" placeholder="輸入折後金額">
         <button onclick="checkPrice()">判定</button>
         <span id="checkResult"></span>
     </div>
@@ -82,14 +80,12 @@
                 <span class="price-limit">協議價 $59,000</span>
             </div>
             <div class="link-group">
-                <a href="https://shopee.tw/search?keyword=音圓%20party-7000&minPrice=40000&maxPrice=58900&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (違規價)</a>
-                <a href="https://www.rakuten.com.tw/search/音圓%20party-7000/?min=40000&max=58900" target="_blank" class="btn rakuten">🔴 樂天 (查回饋)</a>
-                <a href="https://www.etmall.com.tw/Search?keyword=音圓%20party-7000" target="_blank" class="btn etmall">🦅 東森 (查幣折抵)</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20party-7000&minPrice=40000&maxPrice=58900&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (低價排序)</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20party-7000%20領卷&minPrice=40000" target="_blank" class="btn coupon">🎟️ 蝦皮 (領券/折價)</a>
                 <a href="https://tw.buy.yahoo.com/search/product?p=音圓+party-7000&minp=40000&maxp=58900&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
-                <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=音圓%20party-7000" target="_blank" class="btn momo">Ⓜ️ MOMO (查登記)</a>
+                <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=音圓%20party-7000" target="_blank" class="btn momo">Ⓜ️ MOMO (查折價券)</a>
                 <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20party-7000&price=40000-58900" target="_blank" class="btn pchome">📦 PChome 24h</a>
-                <a href="https://www.pcstore.com.tw/adm/psearch.htm?store_k_word=音圓%20party-7000&slt_k_option=1" target="_blank" class="btn pcstore">🏪 商店街 (私訊)</a>
-                <a href="https://biggo.com.tw/s/音圓%20party-7000/?price=40000-58900" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
+                <a href="https://www.pcstore.com.tw/adm/psearch.htm?store_k_word=音圓%20party-7000&slt_k_option=1" target="_blank" class="btn pcstore">🏪 商店街 (現金價)</a>
             </div>
         </div>
 
@@ -99,14 +95,11 @@
                 <span class="price-limit">協議價 $47,900</span>
             </div>
             <div class="link-group">
-                <a href="https://shopee.tw/search?keyword=音圓%20star-55&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (star-55)</a>
-                <a href="https://www.rakuten.com.tw/search/音圓%20star-55/?min=35000&max=47800" target="_blank" class="btn rakuten">🔴 樂天 (查回饋)</a>
-                <a href="https://www.etmall.com.tw/Search?keyword=音圓%20star-55" target="_blank" class="btn etmall">🦅 東森 (查幣折抵)</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20star-55&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (低價排序)</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20star-55%20折&minPrice=35000" target="_blank" class="btn coupon">🎟️ 蝦皮 (搜「折」)</a>
                 <a href="https://tw.buy.yahoo.com/search/product?p=音圓+star-55&minp=35000&maxp=47800&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
-                <a href="https://www.pcstore.com.tw/adm/psearch.htm?store_k_word=音圓%20star-55&slt_k_option=1" target="_blank" class="btn pcstore">🏪 商店街 (私訊)</a>
-                <a href="https://tw.carousell.com/search/音圓%20star-55?price_start=30000&price_end=47000&sort_by=3" target="_blank" class="btn other">🔄 旋轉拍賣</a>
-                <a href="https://biggo.com.tw/s/音圓%20star-55/?price=35000-47800" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
-                <a href="https://buy.line.me/search?q=音圓%20star-55&priceFrom=35000&priceTo=47800" target="_blank" class="btn other">🟢 LINE 購物</a>
+                <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=音圓%20star-55" target="_blank" class="btn momo">Ⓜ️ MOMO (查折價券)</a>
+                <a href="https://www.pcstore.com.tw/adm/psearch.htm?store_k_word=音圓%20star-55&slt_k_option=1" target="_blank" class="btn pcstore">🏪 商店街 (現金價)</a>
             </div>
         </div>
 
@@ -116,13 +109,10 @@
                 <span class="price-limit">協議價 $39,900</span>
             </div>
             <div class="link-group">
-                <a href="https://shopee.tw/search?keyword=音圓%20star-25&minPrice=28000&maxPrice=39800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (star-25)</a>
-                <a href="https://www.rakuten.com.tw/search/音圓%20star-25/?min=28000&max=39800" target="_blank" class="btn rakuten">🔴 樂天 (查回饋)</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20star-25&minPrice=28000&maxPrice=39800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (低價排序)</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20star-25%20券&minPrice=28000" target="_blank" class="btn coupon">🎟️ 蝦皮 (搜「券」)</a>
                 <a href="https://tw.buy.yahoo.com/search/product?p=音圓+star-25&minp=28000&maxp=39800&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
                 <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20star-25&price=28000-39800" target="_blank" class="btn pchome">📦 PChome 24h</a>
-                <a href="https://www.pcstore.com.tw/adm/psearch.htm?store_k_word=音圓%20star-25&slt_k_option=1" target="_blank" class="btn pcstore">🏪 商店街 (私訊)</a>
-                <a href="https://www.ruten.com.tw/find/?q=音圓%20star-25&p=28000%2C39000&sort=rnk%2Fdc" target="_blank" class="btn other">🔨 露天拍賣</a>
-                <a href="https://biggo.com.tw/s/音圓%20star-25/?price=28000-39800" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
             </div>
         </div>
 
@@ -132,12 +122,10 @@
                 <span class="price-limit">協議價 $49,000</span>
             </div>
             <div class="link-group">
-                <a href="https://shopee.tw/search?keyword=音圓%20n2-550&minPrice=38000&maxPrice=48900&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (n2-550)</a>
-                <a href="https://www.rakuten.com.tw/search/音圓%20n2-550/?min=38000&max=48900" target="_blank" class="btn rakuten">🔴 樂天 (查回饋)</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20n2-550&minPrice=38000&maxPrice=48900&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (低價排序)</a>
                 <a href="https://tw.buy.yahoo.com/search/product?p=音圓+n2-550&minp=38000&maxp=48900&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
-                <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20n2-550&minp=38000&maxp=48900&sort=curp" target="_blank" class="btn other">🔨 Yahoo 拍賣</a>
-                <a href="https://www.pcstore.com.tw/adm/psearch.htm?store_k_word=音圓%20n2-550&slt_k_option=1" target="_blank" class="btn pcstore">🏪 商店街 (私訊)</a>
-                <a href="https://biggo.com.tw/s/音圓%20n2-550/?price=38000-48900" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
+                <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=音圓%20n2-550" target="_blank" class="btn momo">Ⓜ️ MOMO (查折價券)</a>
+                <a href="https://www.pcstore.com.tw/adm/psearch.htm?store_k_word=音圓%20n2-550&slt_k_option=1" target="_blank" class="btn pcstore">🏪 商店街 (現金價)</a>
             </div>
         </div>
 
@@ -147,12 +135,10 @@
                 <span class="price-limit">協議價 $44,500</span>
             </div>
             <div class="link-group">
-                <a href="https://shopee.tw/search?keyword=音圓%20n2-350&minPrice=35000&maxPrice=44400&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (n2-350)</a>
-                <a href="https://www.rakuten.com.tw/search/音圓%20n2-350/?min=35000&max=44400" target="_blank" class="btn rakuten">🔴 樂天 (查回饋)</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20n2-350&minPrice=35000&maxPrice=44400&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (低價排序)</a>
                 <a href="https://tw.buy.yahoo.com/search/product?p=音圓+n2-350&minp=35000&maxp=44400&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
-                <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20n2-350&minp=35000&maxp=44400&sort=curp" target="_blank" class="btn other">🔨 Yahoo 拍賣</a>
-                <a href="https://www.pcstore.com.tw/adm/psearch.htm?store_k_word=音圓%20n2-350&slt_k_option=1" target="_blank" class="btn pcstore">🏪 商店街 (私訊)</a>
-                <a href="https://biggo.com.tw/s/音圓%20n2-350/?price=35000-44400" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
+                <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=音圓%20n2-350" target="_blank" class="btn momo">Ⓜ️ MOMO (查折價券)</a>
+                <a href="https://www.pcstore.com.tw/adm/psearch.htm?store_k_word=音圓%20n2-350&slt_k_option=1" target="_blank" class="btn pcstore">🏪 商店街 (現金價)</a>
             </div>
         </div>
 
