@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>音圓查價 (手機版 V18.0)</title>
+    <style>
+        :root { --primary: #2c3e50; --bg: #f0f2f5; --card: #ffffff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: #333; -webkit-tap-highlight-color: transparent; }
+        
+        /* 手機版頂部 */
+        .mobile-header { background: #2c3e50; color: white; padding: 20px 15px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .mobile-header h1 { margin: 0; font-size: 1.2rem; }
+        .mobile-header p { margin: 5px 0 0; font-size: 0.8rem; opacity: 0.8; }
+
+        /* 計算機 (手機優化) */
+        .calc-box { background: #fff; padding: 15px; margin: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 5px solid #f39c12; }
+        .calc-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        select, input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; background: #f9f9f9; -webkit-appearance: none; }
+        button { width: 100%; padding: 12px; background: #c0392b; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; }
+        #checkResult { margin-top: 10px; text-align: center; font-weight: bold; font-size: 1.1rem; display: block; }
+
+        /* 卡片容器 */
+        .container { padding: 0 15px 30px; }
+        
+        /* 產品卡片 */
+        .card { background: var(--card); border-radius: 15px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .card-header { padding: 15px; background: #f8f9fa; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .card-header h2 { margin: 0; font-size: 1.1rem; color: #2c3e50; }
+        .price-badge { background: #e74c3c; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+
+        /* 連結列表 */
+        .link-list { padding: 10px; }
+        .btn { display: flex; align-items: center; padding: 15px; margin-bottom: 8px; background: #fff; border: 1px solid #eee; border-radius: 10px; text-decoration: none; color: #333; font-weight: 600; font-size: 0.95rem; transition: background 0.1s; }
+        .btn:active { background: #f0f0f0; transform: scale(0.98); }
+        .btn:last-child { margin-bottom: 0; }
+        
+        /* 平台圖標色塊 */
+        .icon-box { width: 8px; height: 8px; border-radius: 50%; margin-right: 12px; }
+        .shopee .icon-box { background: #ee4d2d; }
+        .momo .icon-box { background: #d63085; }
+        .pchome .icon-box { background: #2980b9; }
+        .other .icon-box { background: #7f8c8d; }
+        .biggo .icon-box { background: #27ae60; }
+
+        .btn-text { flex-grow: 1; }
+        .arrow { color: #ccc; font-size: 1.2rem; }
+
+    </style>
+</head>
+<body>
+
+<div class="mobile-header">
+    <h1>音圓查價 (手機版 V18.0)</h1>
+    <p>點擊喚醒 App | 關鍵字強制鎖定</p>
+</div>
+
+<div class="calc-box">
+    <div class="calc-row">
+        <select id="modelType">
+            <option value="59000">Party 7000 ($59,000)</option>
+            <option value="47900">Star 55 ($47,900)</option>
+            <option value="39900">Star 25 ($39,900)</option>
+            <option value="49000">N2 550 ($49,000)</option>
+            <option value="44500">N2 350 ($44,500)</option>
+        </select>
+    </div>
+    <div class="calc-row">
+        <input type="number" id="finalPrice" placeholder="輸入結帳金額">
+    </div>
+    <button onclick="checkPrice()">立即判定違規</button>
+    <span id="checkResult"></span>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Party 7000</h2>
+            <span class="price-badge">$59,000</span>
+        </div>
+        <div class="link-list">
+            <a href="https://shopee.tw/search?keyword=音圓%20Party%207000&minPrice=40000&maxPrice=58900&sortBy=price" target="_blank" class="btn shopee">
+                <div class="icon-box"></div><div class="btn-text">蝦皮購物 (40K-58.9K)</div><div class="arrow">›</div>
+            </a>
+            <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=音圓%20Party%207000" target="_blank" class="btn momo">
+                <div class="icon-box"></div><div class="btn-text">MOMO (查登記)</div><div class="arrow">›</div>
+            </a>
+            <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Party%207000&price=40000-58900" target="_blank" class="btn pchome">
+                <div class="icon-box"></div><div class="btn-text">PChome 24h</div><div class="arrow">›</div>
+            </a>
+            <a href="https://biggo.com.tw/s/音圓%20Party%207000/?price=40000-58900" target="_blank" class="btn biggo">
+                <div class="icon-box"></div><div class="btn-text">BigGo 全網搜</div><div class="arrow">›</div>
+            </a>
+            <a href="https://buy.line.me/search?q=音圓%20Party%207000&priceFrom=40000&priceTo=58900" target="_blank" class="btn other">
+                <div class="icon-box"></div><div class="btn-text">LINE 購物</div><div class="arrow">›</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Star 55</h2>
+            <span class="price-badge">$47,900</span>
+        </div>
+        <div class="link-list">
+            <a href="https://shopee.tw/search?keyword=音圓%20Star%2055&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn shopee">
+                <div class="icon-box"></div><div class="btn-text">蝦皮購物 (35K-47.8K)</div><div class="arrow">›</div>
+            </a>
+            <a href="https://www.rakuten.com.tw/search/音圓%20Star%2055/?min=35000&max=47800" target="_blank" class="btn other">
+                <div class="icon-box"></div><div class="btn-text">樂天市場</div><div class="arrow">›</div>
+            </a>
+            <a href="https://biggo.com.tw/s/音圓%20Star%2055/?price=35000-47800" target="_blank" class="btn biggo">
+                <div class="icon-box"></div><div class="btn-text">BigGo 全網搜</div><div class="arrow">›</div>
+            </a>
+            <a href="https://buy.line.me/search?q=音圓%20Star%2055&priceFrom=35000&priceTo=47800" target="_blank" class="btn other">
+                <div class="icon-box"></div><div class="btn-text">LINE 購物</div><div class="arrow">›</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Star 25</h2>
+            <span class="price-badge">$39,900</span>
+        </div>
+        <div class="link-list">
+            <a href="https://shopee.tw/search?keyword=音圓%20Star%2025&minPrice=28000&maxPrice=39800&sortBy=price" target="_blank" class="btn shopee">
+                <div class="icon-box"></div><div class="btn-text">蝦皮購物 (28K-39.8K)</div><div class="arrow">›</div>
+            </a>
+            <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Star%2025&price=28000-39800" target="_blank" class="btn pchome">
+                <div class="icon-box"></div><div class="btn-text">PChome 24h</div><div class="arrow">›</div>
+            </a>
+            <a href="https://www.ruten.com.tw/find/?q=音圓%20Star%2025&p=28000%2C39000&sort=rnk%2Fdc" target="_blank" class="btn other">
+                <div class="
