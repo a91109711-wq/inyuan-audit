@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>音圓控價戰情室 V17.0 (關鍵字修正版)</title>
+    <title>音圓控價戰情室 V20.0 (Yahoo購物中心修正版)</title>
     <style>
         :root { --primary: #2c3e50; --bg: #f4f6f9; --card: #ffffff; --border: #e0e0e0; }
         body { font-family: "Microsoft JhengHei", Arial, sans-serif; margin: 0; padding: 0; color: #333; background: var(--bg); }
         
         /* 標題區 */
-        .header { text-align: center; padding: 30px; background: linear-gradient(to right, #2c3e50, #485563); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .header { text-align: center; padding: 30px; background: linear-gradient(to right, #34054a, #6d076a); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         .header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
         .header p { margin: 10px 0 0; font-size: 1rem; opacity: 0.9; }
 
         /* 計算機 */
         .calc-wrapper { display: flex; justify-content: center; margin: -25px 0 30px; padding: 0 20px; }
-        .calc-panel { background: #fff; padding: 20px 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; border-top: 5px solid #d35400; }
+        .calc-panel { background: #fff; padding: 20px 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; border-top: 5px solid #f39c12; }
         select, input { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
         button { padding: 10px 20px; background: #c0392b; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.2s; }
         button:hover { background: #a93226; }
@@ -43,6 +43,7 @@
         .shopee { border-left: 4px solid #ee4d2d; }
         .momo { border-left: 4px solid #d63085; }
         .pchome { border-left: 4px solid #2980b9; }
+        .yahoo { border-left: 4px solid #6001d2; } /* Yahoo購物中心專用紫 */
         .biggo { border-left: 4px solid #2ecc71; }
         .other { border-left: 4px solid #95a5a6; }
 
@@ -51,8 +52,8 @@
 <body>
 
 <div class="header">
-    <h1>音圓控價戰情室 V17.0</h1>
-    <p>關鍵字已更正：「音圓 N2 550」、「音圓 Party 7000」 (空格版)</p>
+    <h1>音圓控價戰情室 V20.0</h1>
+    <p>修正：移除 Yahoo拍賣，改為「Yahoo購物中心」 | 關鍵字強制鎖定</p>
 </div>
 
 <div class="calc-wrapper">
@@ -80,11 +81,11 @@
             </div>
             <div class="link-group">
                 <a href="https://shopee.tw/search?keyword=音圓%20Party%207000&minPrice=40000&maxPrice=58900&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (40K-58.9K)</a>
+                <a href="https://tw.buy.yahoo.com/search/product?p=音圓+Party+7000&minp=40000&maxp=58900&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
                 <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=音圓%20Party%207000" target="_blank" class="btn momo">Ⓜ️ MOMO (查登記)</a>
                 <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Party%207000&price=40000-58900" target="_blank" class="btn pchome">📦 PChome 24h</a>
                 <a href="https://biggo.com.tw/s/音圓%20Party%207000/?price=40000-58900" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
                 <a href="https://buy.line.me/search?q=音圓%20Party%207000&priceFrom=40000&priceTo=58900" target="_blank" class="btn other">🟢 LINE 購物</a>
-                <a href="https://www.google.com/search?q=東暉國際+音圓+Party+7000" target="_blank" class="btn other">🔴 抓東暉官網</a>
             </div>
         </div>
 
@@ -94,12 +95,12 @@
                 <span class="price-limit">協議價 $47,900</span>
             </div>
             <div class="link-group">
-                <a href="https://shopee.tw/search?keyword=音圓%20Star%2055&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (35K-47.8K)</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20Star%2055&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (音圓 Star 55)</a>
+                <a href="https://tw.buy.yahoo.com/search/product?p=音圓+Star+55&minp=35000&maxp=47800&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
+                <a href="https://shopee.tw/search?keyword=音圓%20star-55&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (star-55)</a>
                 <a href="https://tw.carousell.com/search/音圓%20Star%2055?price_start=30000&price_end=47000&sort_by=3" target="_blank" class="btn other">🔄 旋轉拍賣</a>
-                <a href="https://www.rakuten.com.tw/search/音圓%20Star%2055/?min=35000&max=47800" target="_blank" class="btn other">🔴 樂天市場</a>
                 <a href="https://biggo.com.tw/s/音圓%20Star%2055/?price=35000-47800" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
                 <a href="https://buy.line.me/search?q=音圓%20Star%2055&priceFrom=35000&priceTo=47800" target="_blank" class="btn other">🟢 LINE 購物</a>
-                <a href="https://www.findprice.com.tw/g/音圓%20Star%2055?min=35000&max=47800" target="_blank" class="btn other">🔍 FindPrice</a>
             </div>
         </div>
 
@@ -110,6 +111,7 @@
             </div>
             <div class="link-group">
                 <a href="https://shopee.tw/search?keyword=音圓%20Star%2025&minPrice=28000&maxPrice=39800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (28K-39.8K)</a>
+                <a href="https://tw.buy.yahoo.com/search/product?p=音圓+Star+25&minp=28000&maxp=39800&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
                 <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Star%2025&price=28000-39800" target="_blank" class="btn pchome">📦 PChome 24h</a>
                 <a href="https://www.ruten.com.tw/find/?q=音圓%20Star%2025&p=28000%2C39000&sort=rnk%2Fdc" target="_blank" class="btn other">🔨 露天拍賣</a>
                 <a href="https://biggo.com.tw/s/音圓%20Star%2025/?price=28000-39800" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
@@ -123,7 +125,7 @@
             </div>
             <div class="link-group">
                 <a href="https://shopee.tw/search?keyword=音圓%20N2%20550&minPrice=38000&maxPrice=48900&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (38K-48.9K)</a>
-                <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20N2%20550&minp=38000&maxp=48900&sort=curp" target="_blank" class="btn other">🔨 Yahoo 拍賣</a>
+                <a href="https://tw.buy.yahoo.com/search/product?p=音圓+N2+550&minp=38000&maxp=48900&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
                 <a href="https://biggo.com.tw/s/音圓%20N2%20550/?price=38000-48900" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
                 <a href="https://www.findprice.com.tw/g/音圓%20N2%20550?min=38000&max=48900" target="_blank" class="btn other">🔍 FindPrice</a>
             </div>
@@ -136,7 +138,7 @@
             </div>
             <div class="link-group">
                 <a href="https://shopee.tw/search?keyword=音圓%20N2%20350&minPrice=35000&maxPrice=44400&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (35K-44.4K)</a>
-                <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20N2%20350&minp=35000&maxp=44400&sort=curp" target="_blank" class="btn other">🔨 Yahoo 拍賣</a>
+                <a href="https://tw.buy.yahoo.com/search/product?p=音圓+N2+350&minp=35000&maxp=44400&sort=-price" target="_blank" class="btn yahoo">🟣 Yahoo購物中心</a>
                 <a href="https://biggo.com.tw/s/音圓%20N2%20350/?price=35000-44400" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
                 <a href="https://www.findprice.com.tw/g/音圓%20N2%20350?min=35000&max=44400" target="_blank" class="btn other">🔍 FindPrice</a>
             </div>
