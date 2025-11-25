@@ -3,133 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>音圓控價戰情室 V15.0 (上帝視角版)</title>
+    <title>音圓控價戰情室 V16.0 (電腦精準版)</title>
     <style>
-        :root { --primary: #2c3e50; --schedule-bg: #eaf2f8; --spot-bg: #fdedec; --deep-bg: #e8daef; --card: #fff; }
-        body { font-family: "Microsoft JhengHei", Arial, sans-serif; margin: 0; padding: 0; color: #333; background: #f8f9fa; }
+        :root { --primary: #2c3e50; --bg: #f4f6f9; --card: #ffffff; --border: #e0e0e0; }
+        body { font-family: "Microsoft JhengHei", Arial, sans-serif; margin: 0; padding: 0; color: #333; background: var(--bg); }
         
         /* 標題區 */
-        .main-header { text-align: center; padding: 30px; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .main-header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
-        .main-header p { margin: 10px 0 0; opacity: 0.9; font-size: 0.95rem; }
+        .header { text-align: center; padding: 30px; background: linear-gradient(to right, #2c3e50, #485563); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
+        .header p { margin: 10px 0 0; font-size: 1rem; opacity: 0.9; }
 
-        /* 計算機工具 */
-        .calc-panel { background: #fff; padding: 20px; max-width: 900px; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; gap: 15px; justify-content: center; align-items: center; flex-wrap: wrap; border-top: 5px solid #f39c12; }
-        select, input { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; width: 200px; }
-        button { padding: 12px 25px; background: #c0392b; color: white; cursor: pointer; border: none; font-weight: bold; border-radius: 6px; font-size: 1rem; transition: 0.3s; }
-        button:hover { background: #a93226; transform: scale(1.05); }
-        #checkResult { font-weight: bold; font-size: 1.1rem; padding: 0 10px; }
+        /* 計算機 */
+        .calc-wrapper { display: flex; justify-content: center; margin: -25px 0 30px; padding: 0 20px; }
+        .calc-panel { background: #fff; padding: 20px 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; border-top: 5px solid #f39c12; }
+        select, input { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
+        button { padding: 10px 20px; background: #c0392b; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        button:hover { background: #a93226; }
+        #checkResult { font-weight: bold; margin-left: 10px; font-size: 1.1rem; }
 
-        /* 區域容器 */
-        .section { padding: 20px; max-width: 1250px; margin: 0 auto; }
-        .section-header { font-size: 1.4rem; font-weight: bold; margin-bottom: 20px; padding: 15px; border-radius: 8px; color: white; display: flex; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        
-        /* 藍區 (排程) */
-        .blue-zone .section-header { background: #3498db; }
-        .blue-zone .card { border-top: 4px solid #3498db; }
-        
-        /* 紫區 (深層) */
-        .purple-zone .section-header { background: #8e44ad; }
-        .purple-zone .card { border-top: 4px solid #8e44ad; background: #fbfbfd; }
+        /* 主容器 */
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .grid-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
 
-        /* 紅區 (突擊) */
-        .red-zone .section-header { background: #c0392b; }
-        .red-zone .card { border-top: 4px solid #c0392b; background: #fff5f5; }
-
-        /* 格狀佈局 */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-
-        /* 卡片設計 */
-        .card { background: var(--card); padding: 20px; border-radius: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.05); transition: 0.2s; }
+        /* 卡片樣式 */
+        .card { background: var(--card); padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid var(--border); transition: transform 0.2s; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        .card h3 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 12px; display: flex; justify-content: space-between; font-size: 1.15rem; color: #2c3e50; }
-        .badge { background: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: normal; }
-
-        /* 按鈕優化 */
-        .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; text-decoration: none; color: #333; transition: 0.2s; font-weight: 600; font-size: 0.95rem; text-align: left; padding-left: 15px; position: relative; }
-        .btn::after { content: '>'; position: absolute; right: 15px; color: #ccc; }
-        .btn:hover { background: #f8f9fa; border-color: #bbb; color: #000; z-index: 1; }
         
-        .btn-blue { border-left: 5px solid #3498db; }
-        .btn-purple { border-left: 5px solid #8e44ad; }
-        .btn-red { border-left: 5px solid #e74c3c; }
+        /* 卡片標題 */
+        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px; }
+        .card-header h2 { margin: 0; font-size: 1.4rem; color: #2c3e50; }
+        .price-limit { background: #e74c3c; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; }
+
+        /* 連結按鈕群組 */
+        .link-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn { display: flex; align-items: center; justify-content: center; padding: 12px; background: #fff; border: 1px solid #dcdcdc; border-radius: 6px; text-decoration: none; color: #555; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
+        .btn:hover { background: #f8f9fa; border-color: #999; color: #000; }
+        
+        /* 平台顏色識別 */
+        .shopee { border-left: 4px solid #ee4d2d; }
+        .momo { border-left: 4px solid #d63085; }
+        .pchome { border-left: 4px solid #2980b9; }
+        .biggo { border-left: 4px solid #2ecc71; }
+        .other { border-left: 4px solid #95a5a6; }
 
     </style>
 </head>
 <body>
 
-<div class="main-header">
-    <h1>音圓控價戰情室 V15.0</h1>
-    <p>11大平台全監控 (含LINE購物/PTT黑市) | 五大產品線精準鎖定</p>
+<div class="header">
+    <h1>音圓控價戰情室 V16.0</h1>
+    <p>模式：電腦精準版 | 關鍵字鎖定「音圓+型號」 | 排除所有雜訊</p>
 </div>
 
-<div class="calc-panel">
-    <select id="modelType">
-        <option value="59000">Party-7000 ($59,000)</option>
-        <option value="47900">Star-55 ($47,900)</option>
-        <option value="39900">Star-25 ($39,900)</option>
-        <option value="49000">N2-550 ($49,000)</option>
-        <option value="44500">N2-350 ($44,500)</option>
-    </select>
-    <input type="number" id="finalPrice" placeholder="輸入看到價格">
-    <button onclick="checkPrice()">判讀</button>
-    <span id="checkResult"></span>
+<div class="calc-wrapper">
+    <div class="calc-panel">
+        <select id="modelType">
+            <option value="59000">Party-7000 (底限 $59,000)</option>
+            <option value="47900">Star-55 (底限 $47,900)</option>
+            <option value="39900">Star-25 (底限 $39,900)</option>
+            <option value="49000">N2-550 (底限 $49,000)</option>
+            <option value="44500">N2-350 (底限 $44,500)</option>
+        </select>
+        <input type="number" id="finalPrice" placeholder="輸入結帳金額">
+        <button onclick="checkPrice()">判定</button>
+        <span id="checkResult"></span>
+    </div>
 </div>
 
-<div class="section blue-zone">
-    <div class="section-header">📅 1. 主流平台 (蝦皮/MOMO/PChome)</div>
-    <div class="grid-container">
-        
+<div class="container">
+    <div class="grid-box">
+
         <div class="card">
-            <h3>Party-7000 <span class="badge">< 59K</span></h3>
-            <a href="https://shopee.tw/search?keyword=音圓%20Party-7000&minPrice=40000&maxPrice=58900&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
-            <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=音圓%20Party-7000" target="_blank" class="btn btn-blue">Ⓜ️ MOMO (查Mo幣)</a>
+            <div class="card-header">
+                <h2>Party-7000</h2>
+                <span class="price-limit">協議價 $59,000</span>
+            </div>
+            <div class="link-group">
+                <a href="https://shopee.tw/search?keyword=音圓%20Party-7000&minPrice=40000&maxPrice=58900&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (40K-58.9K)</a>
+                <a href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=音圓%20Party-7000" target="_blank" class="btn momo">Ⓜ️ MOMO (查登記)</a>
+                <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Party-7000&price=40000-58900" target="_blank" class="btn pchome">📦 PChome 24h</a>
+                <a href="https://biggo.com.tw/s/音圓%20Party-7000/?price=40000-58900" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
+                <a href="https://buy.line.me/search?q=音圓%20Party-7000&priceFrom=40000&priceTo=58900" target="_blank" class="btn other">🟢 LINE 購物</a>
+                <a href="https://www.google.com/search?q=東暉國際+音圓+Party-7000" target="_blank" class="btn other">🔴 抓東暉官網</a>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Star-55 <span class="badge">< 47.9K</span></h3>
-            <a href="https://shopee.tw/search?keyword=音圓%20Star-55&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
-            <a href="https://tw.carousell.com/search/音圓%20Star-55?price_start=30000&price_end=47000&sort_by=3" target="_blank" class="btn btn-blue">🔄 旋轉 (現金價)</a>
+            <div class="card-header">
+                <h2>Star-55</h2>
+                <span class="price-limit">協議價 $47,900</span>
+            </div>
+            <div class="link-group">
+                <a href="https://shopee.tw/search?keyword=音圓%20Star-55&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (35K-47.8K)</a>
+                <a href="https://tw.carousell.com/search/音圓%20Star-55?price_start=30000&price_end=47000&sort_by=3" target="_blank" class="btn other">🔄 旋轉拍賣</a>
+                <a href="https://www.rakuten.com.tw/search/音圓%20Star-55/?min=35000&max=47800" target="_blank" class="btn other">🔴 樂天市場</a>
+                <a href="https://biggo.com.tw/s/音圓%20Star-55/?price=35000-47800" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
+                <a href="https://buy.line.me/search?q=音圓%20Star-55&priceFrom=35000&priceTo=47800" target="_blank" class="btn other">🟢 LINE 購物</a>
+                <a href="https://www.findprice.com.tw/g/音圓%20Star-55?min=35000&max=47800" target="_blank" class="btn other">🔍 FindPrice</a>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Star-25 <span class="badge">< 39.9K</span></h3>
-            <a href="https://shopee.tw/search?keyword=音圓%20Star-25&minPrice=28000&maxPrice=39800&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
-            <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Star-25&price=28000-39800" target="_blank" class="btn btn-blue">📦 PChome 掃描</a>
+            <div class="card-header">
+                <h2>Star-25</h2>
+                <span class="price-limit">協議價 $39,900</span>
+            </div>
+            <div class="link-group">
+                <a href="https://shopee.tw/search?keyword=音圓%20Star-25&minPrice=28000&maxPrice=39800&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (28K-39.8K)</a>
+                <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Star-25&price=28000-39800" target="_blank" class="btn pchome">📦 PChome 24h</a>
+                <a href="https://www.ruten.com.tw/find/?q=音圓%20Star-25&p=28000%2C39000&sort=rnk%2Fdc" target="_blank" class="btn other">🔨 露天拍賣</a>
+                <a href="https://biggo.com.tw/s/音圓%20Star-25/?price=28000-39800" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
+            </div>
         </div>
 
         <div class="card">
-            <h3>N2-550 <span class="badge">< 49K</span></h3>
-            <a href="https://shopee.tw/search?keyword=音圓%20N2-550&minPrice=38000&maxPrice=48900&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
-            <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20N2-550&minp=38000&maxp=48900&sort=curp" target="_blank" class="btn btn-blue">🔨 Yahoo拍賣掃描</a>
+            <div class="card-header">
+                <h2>N2-550</h2>
+                <span class="price-limit">協議價 $49,000</span>
+            </div>
+            <div class="link-group">
+                <a href="https://shopee.tw/search?keyword=音圓%20N2-550&minPrice=38000&maxPrice=48900&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (38K-48.9K)</a>
+                <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20N2-550&minp=38000&maxp=48900&sort=curp" target="_blank" class="btn other">🔨 Yahoo 拍賣</a>
+                <a href="https://biggo.com.tw/s/音圓%20N2-550/?price=38000-48900" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
+                <a href="https://www.findprice.com.tw/g/音圓%20N2-550?min=38000&max=48900" target="_blank" class="btn other">🔍 FindPrice</a>
+            </div>
         </div>
 
         <div class="card">
-            <h3>N2-350 <span class="badge">< 44.5K</span></h3>
-            <a href="https://shopee.tw/search?keyword=音圓%20N2-350&minPrice=35000&maxPrice=44400&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
-            <a href="https://biggo.com.tw/s/音圓%20N2-350/?price=35000-44400" target="_blank" class="btn btn-blue">📊 BigGo 全網搜</a>
+            <div class="card-header">
+                <h2>N2-350</h2>
+                <span class="price-limit">協議價 $44,500</span>
+            </div>
+            <div class="link-group">
+                <a href="https://shopee.tw/search?keyword=音圓%20N2-350&minPrice=35000&maxPrice=44400&sortBy=price" target="_blank" class="btn shopee">🦐 蝦皮 (35K-44.4K)</a>
+                <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20N2-350&minp=35000&maxp=44400&sort=curp" target="_blank" class="btn other">🔨 Yahoo 拍賣</a>
+                <a href="https://biggo.com.tw/s/音圓%20N2-350/?price=35000-44400" target="_blank" class="btn biggo">📊 BigGo 全網搜</a>
+                <a href="https://www.findprice.com.tw/g/音圓%20N2-350?min=35000&max=44400" target="_blank" class="btn other">🔍 FindPrice</a>
+            </div>
         </div>
 
     </div>
 </div>
 
-<div class="section purple-zone">
-    <div class="section-header">🕵️ 2. 深層死角 (LINE/FindPrice/PTT)</div>
-    <div class="grid-container">
-        
-        <div class="card">
-            <h3>🟢 LINE 購物 (抓回饋)</h3>
-            <a href="https://buy.line.me/search?q=音圓%20Party-7000&priceFrom=40000&priceTo=58900" target="_blank" class="btn btn-purple">🟢 抓 Party-7000 回饋</a>
-            <a href="https://buy.line.me/search?q=音圓%20Star-55&priceFrom=35000&priceTo=47800" target="_blank" class="btn btn-purple">🟢 抓 Star-55 回饋</a>
-        </div>
+<script>
+    function checkPrice() {
+        let floor = parseFloat(document.getElementById('modelType').value);
+        let price = parseFloat(document.getElementById('finalPrice').value);
+        let result = document.getElementById('checkResult');
 
-        <div class="card">
-            <h3>🔍 FindPrice (搜小店)</h3>
-            <a href="https://www.findprice.com.tw/g/音圓%20N2-550?min=38000&max=48900" target="_blank" class="btn btn-purple">🔍 搜 N2-550 違規</a>
-            <a href="https://www.findprice.com.tw/g/音圓%20N2-350?min=35000&max=44400" target="_blank" class="btn btn-purple">🔍 搜 N2-350 違規</a>
-        </div>
+        if(isNaN(price)) { 
+            result.innerText = "請輸入金額"; 
+            result.style.color = "black";
+            return; 
+        }
 
-        <div class="card">
-            <h3>⚫ 論壇黑市 (抓倒貨)</h3>
-            <a href="https://www.google.com/search?q=site:ptt.cc+音圓+全新+出售" target="_blank" class="btn btn-purple">⚫ PTT 抓「全新出售」</a>
-            <a href="https://www.google.com/search?q=site:mobile01.com+音圓+出售" target="_blank" class="btn btn
+        if (price < floor) {
+            let diff = floor - price;
+            result.style.color = "#c0392b";
+            result.innerText = `❌ 違規！低於協議價 $${diff.toLocaleString()}`;
+        } else {
+            result.style.color = "#27ae60";
+            result.innerText = `✅ 合規`;
+        }
+    }
+</script>
+
+</body>
+</html>
