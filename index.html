@@ -3,129 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>音圓控價狙擊手 V10.0 (全系列・強制品牌鎖定版)</title>
+    <title>音圓控價戰情室 V12.0 (純淨精準版)</title>
     <style>
-        :root { --primary: #2c3e50; --danger: #c0392b; --bg: #f1f2f6; --card: #fff; }
-        body { font-family: "Microsoft JhengHei", Arial, sans-serif; background: var(--bg); padding: 20px; color: #333; }
-        .header { text-align: center; margin-bottom: 30px; padding: 25px; background: linear-gradient(135deg, #2c3e50, #4ca1af); color: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        :root { --primary: #2c3e50; --schedule-bg: #eaf2f8; --spot-bg: #fdedec; --card: #fff; }
+        body { font-family: "Microsoft JhengHei", Arial, sans-serif; margin: 0; padding: 0; color: #333; background: #f8f9fa; }
         
-        .card { background: var(--card); padding: 20px; border-radius: 10px; border-top: 6px solid #ccc; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
-        .card h2 { margin-top: 0; font-size: 1.2rem; border-bottom: 2px solid #f0f0f0; padding-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-        
-        /* 產品識別色 */
-        .card.party { border-top-color: #2980b9; }  /* 深藍 */
-        .card.star55 { border-top-color: #27ae60; } /* 綠 */
-        .card.star25 { border-top-color: #16a085; } /* 青綠 */
-        .card.n2_550 { border-top-color: #8e44ad; } /* 紫 */
-        .card.n2_350 { border-top-color: #d35400; } /* 橘 */
-        .card.calc { border-top-color: #e74c3c; grid-column: 1 / -1; background: #fff5f5; }
+        /* 標題區 */
+        .main-header { text-align: center; padding: 25px; background: #2c3e50; color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .main-header h1 { margin: 0; font-size: 1.6rem; }
+        .main-header p { margin: 8px 0 0; opacity: 0.8; font-size: 0.95rem; }
 
-        /* 按鈕樣式 */
-        .btn { display: block; width: 100%; padding: 14px; margin: 10px 0; background: #fff; border: 1px solid #dfe6e9; border-radius: 8px; text-decoration: none; color: #2d3436; transition: 0.2s; box-sizing: border-box; font-weight: 600; font-size: 0.95rem; }
-        .btn:hover { background: #f1f2f6; border-color: #b2bec3; transform: translateX(5px); }
-        .btn.danger { background: #fff; color: #c0392b; border: 1px solid #fab1a0; }
-        .btn.danger:hover { background: #ffeaa7; color: #d35400; border-color: #e17055; }
-        
-        .badge { background: #e74c3c; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; }
-        .info { font-size: 0.85rem; color: #7f8c8d; margin-bottom: 8px; font-weight: bold; }
-
-        /* 計算機介面 */
-        .calc-box { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
-        button { width: 100%; padding: 12px; background: #c0392b; color: white; border: none; border-radius: 6px; cursor: pointer; margin-top: 5px; font-size: 1rem; font-weight: bold; }
+        /* 計算機工具 */
+        .calc-panel { background: #fff; padding: 20px; max-width: 900px; margin: 20px auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; gap: 15px; justify-content: center; align-items: center; flex-wrap: wrap; border-top: 4px solid #f39c12; }
+        select, input { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+        button { padding: 12px 20px; background: #c0392b; color: white; cursor: pointer; border: none; font-weight: bold; border-radius: 6px; font-size: 1rem; }
         button:hover { background: #a93226; }
-        .result { margin-top: 15px; font-weight: bold; text-align: center; font-size: 1.2rem; padding: 15px; background: white; border-radius: 6px; border: 1px solid #eee; }
+        #checkResult { font-weight: bold; font-size: 1.1rem; padding: 0 10px; }
+
+        /* 區域容器 */
+        .section { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .section-header { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; padding-left: 10px; border-left: 5px solid; display: flex; align-items: center; }
+        
+        /* 藍區 (排程) */
+        .blue-zone .section-header { border-color: #3498db; color: #2c3e50; }
+        .blue-zone .card { border-top: 4px solid #3498db; }
+        
+        /* 紅區 (突擊) */
+        .red-zone .section-header { border-color: #e74c3c; color: #c0392b; margin-top: 30px; }
+        .red-zone .card { border-top: 4px solid #e74c3c; background: #fff5f5; }
+
+        /* 格狀佈局 */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+        /* 卡片設計 */
+        .card { background: var(--card); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .card h3 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; display: flex; justify-content: space-between; font-size: 1.1rem; color: #2c3e50; }
+        .badge { background: #e74c3c; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+
+        /* 按鈕 */
+        .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; background: #fff; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; transition: 0.2s; font-weight: 600; font-size: 0.9rem; text-align: left; padding-left: 15px; position: relative; }
+        .btn::after { content: '>'; position: absolute; right: 15px; color: #999; }
+        .btn:hover { background: #f8f9fa; border-color: #bbb; color: #000; }
+        
+        /* 藍色按鈕 (排程) */
+        .btn-blue { border-left: 4px solid #3498db; }
+        /* 紅色按鈕 (突擊) */
+        .btn-red { border-left: 4px solid #e74c3c; }
+
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>🎯 音圓控價狙擊手 V10.0</h1>
-    <p>全系列精準鎖定｜強制「音圓」關鍵字｜排除配件與贈品干擾</p>
+<div class="main-header">
+    <h1>音圓控價戰情室 V12.0</h1>
+    <p>純淨版：僅針對五大產品線監控｜強制鎖定品牌「音圓」</p>
 </div>
 
-<div class="container">
+<div class="calc-panel">
+    <select id="modelType">
+        <option value="59000">Party-7000 (底限 $59,000)</option>
+        <option value="47900">Star-55 (底限 $47,900)</option>
+        <option value="39900">Star-25 (底限 $39,900)</option>
+        <option value="49000">N2-550 (底限 $49,000)</option>
+        <option value="44500">N2-350 (底限 $44,500)</option>
+    </select>
+    <input type="number" id="finalPrice" placeholder="輸入看到價格">
+    <button onclick="checkPrice()">判讀</button>
+    <span id="checkResult"></span>
+</div>
 
-    <div class="card calc">
-        <h2>🧮 違規判定計算機 (V10.0 協議價版)</h2>
-        <div class="calc-box">
-            <div>
-                <label>選擇型號 (自動帶入協議價)</label>
-                <select id="modelType">
-                    <option value="59000">Party-7000 (底限 $59,000)</option>
-                    <option value="47900">Star-55 (底限 $47,900)</option>
-                    <option value="39900">Star-25 (底限 $39,900)</option>
-                    <option value="49000">N2-550 (底限 $49,000)</option>
-                    <option value="44500">N2-350 (底限 $44,500)</option>
-                </select>
-            </div>
-            <div>
-                <label>輸入實際/結帳價格</label>
-                <input type="number" id="finalPrice" placeholder="例如: 48000">
-                <button onclick="checkPrice()">立即判定</button>
-            </div>
+<div class="section blue-zone">
+    <div class="section-header">📅 排程監控區 (點擊即查・過濾配件)</div>
+    <div class="grid-container">
+        
+        <div class="card">
+            <h3>Party-7000 <span class="badge">< 59K</span></h3>
+            <a href="https://shopee.tw/search?keyword=音圓%20Party-7000&minPrice=40000&maxPrice=58900&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
+            <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Party-7000&price=40000-58900" target="_blank" class="btn btn-blue">📦 PChome 違規掃描</a>
         </div>
-        <div id="result" class="result">請輸入金額進行判定...</div>
+
+        <div class="card">
+            <h3>Star-55 <span class="badge">< 47.9K</span></h3>
+            <a href="https://shopee.tw/search?keyword=音圓%20Star-55&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
+            <a href="https://tw.carousell.com/search/音圓%20Star-55?price_start=30000&price_end=47000&sort_by=3" target="_blank" class="btn btn-blue">🔄 旋轉拍賣 (現金價)</a>
+        </div>
+
+        <div class="card">
+            <h3>Star-25 <span class="badge">< 39.9K</span></h3>
+            <a href="https://shopee.tw/search?keyword=音圓%20Star-25&minPrice=28000&maxPrice=39800&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
+            <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Star-25&price=28000-39800" target="_blank" class="btn btn-blue">📦 PChome 違規掃描</a>
+        </div>
+
+        <div class="card">
+            <h3>N2-550 <span class="badge">< 49K</span></h3>
+            <a href="https://shopee.tw/search?keyword=音圓%20N2-550&minPrice=38000&maxPrice=48900&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
+            <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20N2-550&minp=38000&maxp=48900&sort=curp" target="_blank" class="btn btn-blue">🔨 Yahoo拍賣掃描</a>
+        </div>
+
+        <div class="card">
+            <h3>N2-350 <span class="badge">< 44.5K</span></h3>
+            <a href="https://shopee.tw/search?keyword=音圓%20N2-350&minPrice=35000&maxPrice=44400&sortBy=price" target="_blank" class="btn btn-blue">🦐 蝦皮違規掃描</a>
+            <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20N2-350&minp=35000&maxp=44400&sort=curp" target="_blank" class="btn btn-blue">🔨 Yahoo拍賣掃描</a>
+        </div>
+
     </div>
+</div>
 
-    <div class="card party">
-        <h2>音圓 Party-7000 <span class="badge">< 59K</span></h2>
-        <div class="info">違規區間：$40,000 ~ $58,900</div>
-        
-        <a href="https://shopee.tw/search?keyword=音圓%20Party-7000&minPrice=40000&maxPrice=58900&sortBy=price" target="_blank" class="btn danger">
-            🦐 蝦皮：抓 < 59,000 (精準鎖定)
-        </a>
-        <a href="https://shopee.tw/search?keyword=音圓%20Party-7000%20領卷&minPrice=40000" target="_blank" class="btn danger">
-            🎟️ 蝦皮：抓「領券」折價
-        </a>
-        <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Party-7000&price=40000-58900" target="_blank" class="btn">
-            📦 PChome：抓違規賣場
-        </a>
+<div class="section red-zone">
+    <div class="section-header">⚡ 突擊檢查區 (針對特定破口)</div>
+    <div class="grid-container">
+
+        <div class="card">
+            <h3>Party-7000 突擊</h3>
+            <a href="https://shopee.tw/search?keyword=音圓%20Party-7000%20領卷&minPrice=40000" target="_blank" class="btn btn-red">🎟️ 抓「領券/折價」</a>
+            <a href="https://www.google.com/search?q=東暉國際+Party-7000" target="_blank" class="btn btn-red">🔴 抓「東暉官網」標題</a>
+        </div>
+
+        <div class="card">
+            <h3>Star-55 突擊</h3>
+            <a href="https://shopee.tw/search?keyword=音圓%20Star-55%20甜甜價&minPrice=35000" target="_blank" class="btn btn-red">🍬 抓「甜甜價」暗盤</a>
+            <a href="https://shopee.tw/search?keyword=音圓%20Star-55%20現金&minPrice=35000" target="_blank" class="btn btn-red">💰 抓「現金價」</a>
+        </div>
+
+        <div class="card">
+            <h3>N2 系列突擊</h3>
+            <a href="https://shopee.tw/search?keyword=音圓%20N2%20領卷&minPrice=20000" target="_blank" class="btn btn-red">🎟️ 抓「N2 領券」</a>
+        </div>
+
+        <div class="card">
+            <h3>Star-25 突擊</h3>
+            <a href="https://www.ruten.com.tw/find/?q=音圓%20Star-25&p=20000%2C39000&sort=rnk%2Fdc" target="_blank" class="btn btn-red">🔨 抓「露天拍賣」</a>
+        </div>
+
     </div>
+</div>
 
-    <div class="card star55">
-        <h2>音圓 Star-55 <span class="badge">< 47.9K</span></h2>
-        <div class="info">違規區間：$35,000 ~ $47,800</div>
+<script>
+    function checkPrice() {
+        let floor = parseFloat(document.getElementById('modelType').value);
+        let price = parseFloat(document.getElementById('finalPrice').value);
+        let result = document.getElementById('checkResult');
 
-        <a href="https://shopee.tw/search?keyword=音圓%20Star-55&minPrice=35000&maxPrice=47800&sortBy=price" target="_blank" class="btn danger">
-            🦐 蝦皮：抓 < 47,900 (精準鎖定)
-        </a>
-        <a href="https://shopee.tw/search?keyword=音圓%20Star-55%20甜甜價&minPrice=35000" target="_blank" class="btn danger">
-            🍬 蝦皮：抓「甜甜價」私訊
-        </a>
-        <a href="https://tw.carousell.com/search/音圓%20Star-55?price_start=30000&price_end=47000&sort_by=3" target="_blank" class="btn">
-            🔄 旋轉拍賣：抓現金流血價
-        </a>
-    </div>
+        if(isNaN(price)) { 
+            result.innerText = "請輸入金額"; 
+            result.style.color = "black";
+            return; 
+        }
 
-    <div class="card star25">
-        <h2>音圓 Star-25 <span class="badge">< 39.9K</span></h2>
-        <div class="info">違規區間：$28,000 ~ $39,800</div>
-        
-        <a href="https://shopee.tw/search?keyword=音圓%20Star-25&minPrice=28000&maxPrice=39800&sortBy=price" target="_blank" class="btn danger">
-            🦐 蝦皮：抓 < 39,900 (精準鎖定)
-        </a>
-        <a href="https://ecshweb.pchome.com.tw/search/v3.3/?q=音圓%20Star-25&price=28000-39800" target="_blank" class="btn">
-            📦 PChome：抓 PChome 破價
-        </a>
-    </div>
+        if (price < floor) {
+            let diff = floor - price;
+            result.style.color = "#c0392b";
+            result.innerHTML = `❌ 違規！低於協議價 $${diff.toLocaleString()}`;
+        } else {
+            result.style.color = "#27ae60";
+            result.innerHTML = `✅ 合規`;
+        }
+    }
+</script>
 
-    <div class="card n2_550">
-        <h2>音圓 N2-550 <span class="badge">< 49K</span></h2>
-        <div class="info">違規區間：$38,000 ~ $48,900</div>
-        
-        <a href="https://shopee.tw/search?keyword=音圓%20N2-550&minPrice=38000&maxPrice=48900&sortBy=price" target="_blank" class="btn danger">
-            🦐 蝦皮：抓 < 49,000 (精準鎖定)
-        </a>
-        <a href="https://tw.bid.yahoo.com/search/auction/product?p=音圓%20N2-550&minp=38000&maxp=48900&sort=curp" target="_blank" class="btn">
-            🔨 Y拍：抓 N2-550 低價區
-        </a>
-    </div>
-
-    <div class="card n2_350">
-        <h2>音圓 N2-350 <span class="badge">< 44.5K</span></h2>
-        <div class="info">違規區間：$35,000 ~ $44,400</div>
-        
-        <a href="https://shopee.tw/search?keyword=音圓%20N2-350&minPrice=35000&maxPrice=44400&sortBy=price" target="_blank" class="btn danger">
-            🦐
+</body>
+</html>
